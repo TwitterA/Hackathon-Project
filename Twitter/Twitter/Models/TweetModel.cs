@@ -24,7 +24,7 @@ namespace Twitter.Models
 
 
         //Relationship One-to-Many (parrentTweet-tweets)
-/*        public int? ParentId { get; set; }*/
+        public int? ParentId { get; set; }
         public TweetModel? Parent { get; set; }
        
         public List <TweetModel> Replies { get; set; }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,6 @@ namespace Twitter.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
         public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
@@ -22,76 +22,100 @@ namespace Twitter.Controllers
             _db = context;
             _userManager = userManager;
         }
-/*        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }*/
+   
         public IActionResult Index()
         {
             var Tweets = _db.Tweets.Include(b => b.User).ToList();
             Tweets.Reverse();
             var UserId = _userManager.GetUserId(User);
-
+            if(UserId==null) ViewData["UserId"] = "none";
+            else ViewData["UserId"] = UserId;
             ViewData["Tweets"] = Tweets;
-            ViewData["UserId"] = UserId;
+            
             return View();
         }
 
+        [Authorize]
         [HttpPost]
-        public IActionResult Tweet([Bind( "Content", "Time")] TweetModel Tweet,string UserId)
+        public IActionResult Tweet([Bind("Content")] TweetModel Tweet, string UserId)
         {
             Tweet.UserId = UserId;
+            Tweet.Time = DateTime.Now.ToString();
             if (ModelState.IsValid) //check the state of model
             {
                 _db.Tweets.Add(Tweet);
                 _db.SaveChanges();
-                
+
             }
             return RedirectToAction("Index");
         }
         // POST - /Home/delete/id
+        [Authorize]
         [HttpPost]
         public IActionResult Delete(int? id)
         {
-            var Tweets = _db.Tweets.ToList().FirstOrDefault(p => p.Id == id);
-            if (id == null || Tweets == null)
+            var Tweet = _db.Tweets.ToList().FirstOrDefault(p => p.Id == id);
+            if (id == null || Tweet == null)
             {
                 return View("_NotFound");
             }
-            _db.Tweets.Remove(Tweets);
+            _db.Tweets.Remove(Tweet);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-        //Get  Home/TweeT
-        public IActionResult Reply()
-        {
-            return View();
-        }
+
+        [Authorize]
         [HttpPost]
-        public IActionResult Reply([Bind("Content", "Time", "ParentId", "UserId")] TweetModel Tweets)
+        public IActionResult Reply([Bind("Content")] TweetModel Tweet, int ParentId, string UserId)
         {
+            Tweet.UserId = UserId;
+            Tweet.Time = DateTime.Now.ToString();
+            Tweet.ParentId = ParentId;
             if (ModelState.IsValid) //check the state of model
             {
-                _db.Tweets.Add(Tweets);
+                _db.Tweets.Add(Tweet);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Home", new { Id=ParentId });
             }
             return View();
         }
         public IActionResult Details(int? id)
         {
-            var Tweets = _db.Tweets.ToList().Find(a => a.Id == id);
-            ViewData["Tweet"] = Tweets;
-            if (Tweets == null)
+            var Tweet = _db.Tweets.Include(t => t.User).Include(t => t.Replies).ToList().Find(t => t.Id == id);
+
+            if (Tweet == null)
             {
                 return Content("Not found");
             }
-            else
-            {
-                ViewData["Tweet"] = Tweets;
-                return View();
-            }
+            var UserId = _userManager.GetUserId(User);
+            if (UserId == null) ViewData["UserId"] = "none";
+            else ViewData["UserId"] = UserId;
+            ViewData["Tweet"] = Tweet;
+            return View();
+
         }
+
+        [Authorize]
+        public IActionResult Like(int id)
+        {
+            var Tweet = _db.Tweets.Include(t => t.User).Include(t => t.Replies).ToList().Find(t => t.Id == id);
+
+            if (Tweet == null)
+            {
+                return Content("Not found");
+            }
+            FavoriteModel fave = new FavoriteModel();
+            
+            var UserId = _userManager.GetUserId(User);
+            
+            fave.UserId = UserId;
+            fave.TweetId = id;
+            _db.Favorites.Add(fave);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
         public IActionResult Privacy()
         {
             return View();
