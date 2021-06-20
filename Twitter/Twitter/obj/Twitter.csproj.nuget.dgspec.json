@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj": {}
+    "C:\\Users\\Samirah Alhusayni\\Documents\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj": {
+    "C:\\Users\\Samirah Alhusayni\\Documents\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
+        "projectUniqueName": "C:\\Users\\Samirah Alhusayni\\Documents\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
         "projectName": "Twitter",
-        "projectPath": "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
-        "packagesPath": "C:\\Users\\SAFCSP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\obj\\",
+        "projectPath": "C:\\Users\\Samirah Alhusayni\\Documents\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
+        "packagesPath": "C:\\Users\\Samirah Alhusayni\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Samirah Alhusayni\\Documents\\Hackathon-Project\\Twitter\\Twitter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SAFCSP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Samirah Alhusayni\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
