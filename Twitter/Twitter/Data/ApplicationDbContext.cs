@@ -22,7 +22,13 @@ namespace Twitter.Data
             base.OnModelCreating(modelBuilder);
         }*/
         public DbSet<TweetModel> Tweets { get; set; }
-
+        public DbSet<FavoriteModel> Favorites { get; set; }
+        public DbSet<FollowingModel> Following { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<FollowingModel>().HasKey(table => new { table.Followed_id, table.Follower_id });
+        }
 
     }
 }
