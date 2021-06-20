@@ -1,5 +1,8 @@
-﻿@{
+﻿@model TweetModel
+@{
     ViewData["Title"] = "Home Page";
+    var tweets = (List<TweetModel>)ViewData["Tweets"];
+    var userId = ViewData["UserId"];
 }
 
 <body style='background-color: #15202B;'>
@@ -32,7 +35,7 @@
                 <hr class="border-gray-600">
                 <!--@*add tweet form*@-->
                 <!--middle creat tweet-->
-                <form asp-action="Tweet" method="post">
+                <form asp-action="Tweet" asp-route-UserId=@userId method="post" >
                     <div class="flex">
                         <div class="m-2 w-10 py-1">
                             <!--@*user image*@-->
@@ -40,7 +43,7 @@
                         </div>
 
                         <div class="flex-1 px-2 pt-2 mt-2">
-                            <textarea class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50" placeholder="What's happening?"></textarea>
+                            <textarea class=" bg-transparent text-gray-400 font-medium text-lg w-full" asp-for="Content" rows="2" cols="50" placeholder="What's happening?"></textarea>
                         </div>
                     </div>
                     <!--middle creat tweet below icons-->
@@ -77,7 +80,7 @@
                         </div>
 
                         <div class="flex-1">
-                            <button class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+                            <button class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right" type="submit">
                                 Tweet
                             </button>
                         </div>
@@ -90,7 +93,7 @@
                 </div>
 
                 @*start foreach*@
-                @*@foreach(){*@
+                @foreach(var tweet in tweets){
                 <!--first tweet start-->
                 <div class="flex flex-shrink-0 p-4 pb-0">
                     <a href="#" class="flex-shrink-0 group block">
@@ -101,10 +104,10 @@
                             <div class="ml-3">
                                 <p class="text-base leading-6 font-medium text-white">
                                     <!--@*username*@-->
-                                    Sonali Hirave
+                                    @@@tweet.User.Email
                                     <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
                                         <!--@*at name w date*@-->
-                                        @@ShonaDesign . 16 April
+                                        @@@tweet.User.Email . @tweet.Time
                                     </span>
                                 </p>
                             </div>
@@ -114,10 +117,7 @@
                 <div class="pl-16">
                     <p class="text-base width-auto font-medium text-white flex-shrink">
                         <!--@*tweet content*@-->
-                        Day 07 holaaa of the challenge <span class="text-blue-400">#100DaysOfCode</span>
-                        I was wondering what I can do with <span class="text-blue-400">#tailwindcss</span>, so just started building Twitter  UI using Tailwind and so far it looks so promising. I will post my code after completion.
-                        [07/100]
-                        <span class="text-blue-400"> #WomenWhoCode #CodeNewbie</span>
+                        @tweet.Content
                     </p>
 
                     <!-- under tweet icons-->
@@ -157,9 +157,9 @@
 
                 </div>
                 <hr class="border-gray-600">
-            </div>
             @*end foreach*@
-            @*}*@
+            }
+            </div>
 
             <div class="w-2/5 h-12">
                 <!--right menu-->

@@ -1,26 +1,31 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+<ul>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a href="#" class="flex-shrink-0 group block">
+            <div class="flex items-center">
+                <div>
+                    <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+                </div>
+                <div class="ml-3">
+                    <p class="text-base leading-6 font-medium text-white">
+                        @UserManager.GetUserName(User).Substring(0, UserManager.GetUserName(User).IndexOf('@'))
+                    </p>
+                    <p class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                        @@@UserManager.GetUserName(User).Substring(0, UserManager.GetUserName(User).IndexOf('@'))
+                    </p>
+                </div>
+            </div>
+        </a>
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+    }
+    else
+    {
+        <a class="bg-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full mr-2" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="border border-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    }
 </ul>

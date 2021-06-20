@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,11 @@ namespace Twitter.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
-        public HomeController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        public HomeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _db = context;
+            _userManager = userManager;
         }
 /*        public HomeController(ILogger<HomeController> logger)
         {
@@ -24,25 +28,26 @@ namespace Twitter.Controllers
         }*/
         public IActionResult Index()
         {
-            var Tweets = _db.Tweets.ToList();
+            var Tweets = _db.Tweets.Include(b => b.User).ToList();
+            Tweets.Reverse();
+            var UserId = _userManager.GetUserId(User);
+
             ViewData["Tweets"] = Tweets;
+            ViewData["UserId"] = UserId;
             return View();
         }
-        //Get  Home/TweeT
-        public IActionResult Tweet()
-        {
-            return View();
-        }
+
         [HttpPost]
-        public IActionResult Tweet([Bind( "Content", "Time", "ParentId", "UserId")] TweetModel Tweets)
+        public IActionResult Tweet([Bind( "Content", "Time")] TweetModel Tweet,string UserId)
         {
+            Tweet.UserId = UserId;
             if (ModelState.IsValid) //check the state of model
             {
-                _db.Tweets.Add(Tweets);
+                _db.Tweets.Add(Tweet);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+                
             }
-            return View();
+            return RedirectToAction("Index");
         }
         // POST - /Home/delete/id
         [HttpPost]
