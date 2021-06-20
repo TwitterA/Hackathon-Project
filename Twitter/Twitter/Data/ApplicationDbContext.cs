@@ -14,6 +14,13 @@ namespace Twitter.Data
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.Entity<TweetModel>().HasData(new TweetModel() { Id = 1, Content="test", Time="10-10-2020" ,UserId= "35606eb1-8062-420c-8eb2-fe8eaa26c73f", ParentId = 2 });
+            modelBuilder.Entity<TweetModel>().HasData(new TweetModel() { Id = 2, Content = "test", Time = "10-10-2020", UserId = "35606eb1-8062-420c-8eb2-fe8eaa26c73f", ParentId = 2 });
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<TweetModel> Tweets { get; set; }
 
 

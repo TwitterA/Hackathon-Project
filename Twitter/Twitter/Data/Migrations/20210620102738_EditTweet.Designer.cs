@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Twitter.Data;
 
 namespace Twitter.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210620102738_EditTweet")]
+    partial class EditTweet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,24 +248,6 @@ namespace Twitter.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Tweets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "test",
-                            ParentId = 2,
-                            Time = "10-10-2020",
-                            UserId = "35606eb1-8062-420c-8eb2-fe8eaa26c73f"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "test",
-                            ParentId = 2,
-                            Time = "10-10-2020",
-                            UserId = "35606eb1-8062-420c-8eb2-fe8eaa26c73f"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
