@@ -14,7 +14,7 @@ Twitter is a online microblogging service that allows registered members to broa
 <img src="TwitterDemo.gif">
 
 ## Deploy 
-<a href="https://twittertuwaiq.azurewebsites.net/"> Twitter Clone </a>
+<a href="https://itwitter.azurewebsites.net/"> Twitter Clone </a>
 
 ## Wireframe
 
@@ -43,25 +43,15 @@ Twitter is a online microblogging service that allows registered members to broa
  - EF Core
 ### Authors
 
-Raneen Alzafarani
-
-Albandry AlQaseemi
-
-Taghreed alqahtani
-
-Samirah Alhusayni
-
-Shahad Alshehri
-
-Batool Alghamdi
-
-Amal Almutairi
-
-Fatimah Alqhtany
-
-Norah Almutairi
-
-Hanan Hakami
-
-Amal AlAgel 
+- Raneen Alzafarani
+- Albandry AlQaseemi
+- Taghreed alqahtani
+- Samirah Alhusayni
+- Shahad Alshehri
+- Batool Alghamdi
+- Amal Almutairi
+- Fatimah Alqhtany
+- Norah Almutairi
+- Hanan Hakami
+- Amal AlAgel 
 
