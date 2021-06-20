@@ -6720,19 +6720,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\amalf\\.nuget\\packages\\": {}
+    "C:\\Users\\SAFCSP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amalf\\OneDrive\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
+      "projectUniqueName": "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
       "projectName": "Twitter",
-      "projectPath": "C:\\Users\\amalf\\OneDrive\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
-      "packagesPath": "C:\\Users\\amalf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amalf\\OneDrive\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\obj\\",
+      "projectPath": "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\Twitter.csproj",
+      "packagesPath": "C:\\Users\\SAFCSP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SAFCSP\\Desktop\\Hackathon-Project\\Twitter\\Twitter\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\amalf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\SAFCSP\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6801,7 +6801,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
